@@ -13,9 +13,9 @@ npm run dev               # http://localhost:4321
 ## Quality gates
 
 ```bash
-npm run build             # static build to dist/
+npm run build             # static build to dist/ + compliance check (fails on any violation)
 npm run check             # Astro + TypeScript check
-npm run a2p-check         # compliance assertions against dist/ (fails on any violation)
+npm run a2p-check         # compliance assertions against dist/ only
 npm run a2p-check -- --url https://americlearinsurance.com --report docs/COMPLIANCE-REPORT.md
 npm run preview           # then, in another terminal:
 npm run smoke -- --base http://localhost:4321
@@ -53,7 +53,9 @@ See `public/images/README.md`. Two styled slots are reserved (home hero, about p
 
 ## How deploys work
 
-The Railway service is connected to this GitHub repo. Every push to `main` triggers a Railway build using `railway.json`: `npm run build && npm run a2p-check` (a failing compliance check blocks the deploy). Railway's builder detects the Astro static output and serves `dist/` with Caddy using `Caddyfile.template` (branded 404 page, www → apex redirect, security headers). You can also deploy the working directory directly with `railway up`.
+The site runs on Railway (project `americlear-insurance-site`, service of the same name). `npm run build` runs `astro build` and then the compliance check, so a failing check fails the build and blocks the deploy on any host. Railway's builder (Railpack) detects the Astro static output and serves `dist/` with Caddy using `Caddyfile.template` (branded 404 page, www → apex redirect, security headers).
+
+Deploy from this folder with `railway up` (the folder is linked to the project). If the Railway service is connected to the GitHub repo (service → Settings → Source), every push to `main` also deploys automatically.
 
 The custom domain is configured in Railway (service → Settings → Networking → Custom Domain) and DNS lives at Cloudflare.
 
@@ -68,7 +70,6 @@ scripts/a2p-check.mjs      compliance assertions (Appendix C)
 scripts/smoke.mjs          Playwright smoke test
 scripts/screenshots.mjs    form screenshots for the registration kit
 scripts/icons.mjs          generates favicons and OG image from the SVG wordmark
-railway.json               Railway build/deploy config (build + compliance gate)
-Caddyfile.template         static server config used by Railway
+Caddyfile.template         static server config used by Railway (Railpack)
 docs/                      registration kit, launch checklist, compliance report, screenshots
 ```
