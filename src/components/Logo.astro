@@ -1,0 +1,45 @@
+---
+/**
+ * Original AmeriClear wordmark. Variants:
+ *  - horizontal: monogram shield + wordmark side by side (header)
+ *  - stacked: monogram above wordmark (footer / OG image)
+ *  - monogram: shield only (favicon)
+ * `tone` controls colors: 'light' for navy backgrounds, 'dark' for ivory.
+ */
+interface Props {
+  variant?: 'horizontal' | 'stacked' | 'monogram';
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+const { variant = 'horizontal', tone = 'light', class: cls = '' } = Astro.props;
+const text = tone === 'light' ? '#F6F3EC' : '#0B1A33';
+const gold = tone === 'light' ? '#D6B96B' : '#B8923F';
+const sub = tone === 'light' ? '#C9C4B6' : '#5B6675';
+---
+
+{variant === 'monogram' && (
+  <svg class={cls} viewBox="0 0 64 72" role="img" aria-label="AmeriClear monogram" xmlns="http://www.w3.org/2000/svg">
+    <path d="M32 3 L58 12 V36 C58 52 46 63 32 69 C18 63 6 52 6 36 V12 Z" fill="none" stroke={gold} stroke-width="2.5" stroke-linejoin="round" />
+    <text x="32" y="46" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="600" fill={text} letter-spacing="1">AC</text>
+  </svg>
+)}
+
+{variant === 'horizontal' && (
+  <svg class={cls} viewBox="0 0 320 56" role="img" aria-label="AmeriClear Insurance Agency" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24 4 L44 11 V29 C44 41 35 49 24 54 C13 49 4 41 4 29 V11 Z" fill="none" stroke={gold} stroke-width="2" stroke-linejoin="round" />
+    <text x="24" y="36" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="19" font-weight="600" fill={text}>AC</text>
+    <rect x="54" y="8" width="1" height="40" fill={gold} />
+    <text x="66" y="29" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-weight="600" fill={text} letter-spacing="2.5">AMERICLEAR</text>
+    <text x="67" y="46" font-family="'Segoe UI', Arial, sans-serif" font-size="10.5" fill={sub} letter-spacing="3.6">INSURANCE AGENCY</text>
+  </svg>
+)}
+
+{variant === 'stacked' && (
+  <svg class={cls} viewBox="0 0 240 132" role="img" aria-label="AmeriClear Insurance Agency" xmlns="http://www.w3.org/2000/svg">
+    <path d="M120 4 L146 13 V37 C146 53 134 64 120 70 C106 64 94 53 94 37 V13 Z" fill="none" stroke={gold} stroke-width="2.5" stroke-linejoin="round" />
+    <text x="120" y="47" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="600" fill={text} letter-spacing="1">AC</text>
+    <rect x="88" y="80" width="64" height="1" fill={gold} />
+    <text x="120" y="106" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-weight="600" fill={text} letter-spacing="3">AMERICLEAR</text>
+    <text x="120" y="124" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="10.5" fill={sub} letter-spacing="3.8">INSURANCE AGENCY</text>
+  </svg>
+)}

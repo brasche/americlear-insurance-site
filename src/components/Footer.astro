@@ -1,0 +1,70 @@
+---
+import Logo from './Logo.astro';
+import {
+  LEGAL_NAME,
+  BRAND_NAME,
+  ADDRESS,
+  PHONE,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  EMAIL,
+  LICENSE_LINE,
+  STATES,
+  HOURS,
+  PRODUCTS,
+  FOOTER_DISCLAIMER,
+} from '../config';
+const year = new Date().getFullYear();
+const showDba = LEGAL_NAME.replace(/,?\s*LLC\.?$/i, '').trim() !== BRAND_NAME.trim();
+---
+
+<footer class="mt-auto border-t-4 border-gold bg-navy text-ivory" id="site-footer">
+  <div class="container-x grid gap-10 py-14 md:grid-cols-12">
+    <div class="md:col-span-4">
+      <Logo variant="stacked" tone="light" class="h-32 w-auto" />
+      <p class="mt-6 max-w-xs text-sm leading-relaxed text-ivory/80">
+        An independent insurance agency helping individuals and families compare coverage with clear, unhurried guidance.
+      </p>
+    </div>
+
+    <div class="md:col-span-3">
+      <h2 class="mb-4 font-sans text-xs font-semibold uppercase tracking-[0.18em] text-gold-light">Coverage</h2>
+      <ul class="space-y-2 text-[0.95rem]">
+        {PRODUCTS.map((p) => (
+          <li><a class="hover:text-gold-light" href={`/${p.slug}/`}>{p.name}</a></li>
+        ))}
+        <li><a class="hover:text-gold-light" href="/quote/">Get a Quote</a></li>
+        <li><a class="hover:text-gold-light" href="/about/">About</a></li>
+        <li><a class="hover:text-gold-light" href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="md:col-span-5">
+      <h2 class="mb-4 font-sans text-xs font-semibold uppercase tracking-[0.18em] text-gold-light">Contact</h2>
+      <address class="not-italic text-[0.95rem] leading-relaxed">
+        <p class="font-semibold text-ivory">{LEGAL_NAME}{showDba && ` DBA ${BRAND_NAME}`}</p>
+        <p>{ADDRESS.street}<br />{ADDRESS.city}, {ADDRESS.state} {ADDRESS.zip}</p>
+        <p class="mt-2">
+          Phone: {PHONE ? <a class="hover:text-gold-light" href={PHONE_TEL}>{PHONE}</a> : <span>{PHONE_DISPLAY}</span>}
+        </p>
+        <p>Email: <a class="hover:text-gold-light" href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
+        <p class="mt-2">{HOURS}</p>
+        <p class="mt-2 text-ivory/80">{LICENSE_LINE}</p>
+        <p class="text-ivory/80">{STATES}</p>
+      </address>
+    </div>
+  </div>
+
+  <div class="border-t border-ivory/15">
+    <div class="container-x py-8 text-sm text-ivory/75">
+      <nav aria-label="Legal" class="mb-5 flex flex-wrap gap-x-6 gap-y-2 font-semibold text-ivory">
+        <a class="hover:text-gold-light" href="/privacy-policy/">Privacy Policy</a>
+        <a class="hover:text-gold-light" href="/terms/">Terms &amp; Conditions</a>
+        <a class="hover:text-gold-light" href="/sms-terms/">SMS Terms</a>
+        <a class="hover:text-gold-light" href="/licensing/">Licensing &amp; Disclosures</a>
+      </nav>
+      <p class="max-w-4xl leading-relaxed">{FOOTER_DISCLAIMER}</p>
+      <p class="mt-4">&copy; {year} {LEGAL_NAME}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

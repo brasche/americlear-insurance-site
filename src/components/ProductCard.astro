@@ -1,0 +1,22 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  slug: string;
+  name: string;
+  short: string;
+}
+const { slug, name, short } = Astro.props;
+const icons: Record<string, 'family' | 'document' | 'shield' | 'compass'> = {
+  'life-insurance': 'family',
+  'final-expense': 'document',
+  medicare: 'shield',
+  annuities: 'compass',
+};
+---
+
+<a href={`/${slug}/`} class="card group flex flex-col transition-shadow hover:shadow-[0_6px_24px_rgba(9,18,41,0.12)]">
+  <span class="text-gold"><Icon name={icons[slug] ?? 'shield'} class="h-9 w-9" /></span>
+  <h3 class="mt-4 text-xl group-hover:text-gold-text">{name}</h3>
+  <p class="mt-2 flex-1 text-sm text-slate">{short}</p>
+  <span class="mt-4 text-sm font-semibold text-gold-text">Learn more &rarr;</span>
+</a>

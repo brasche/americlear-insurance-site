@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import {
+  LEGAL_NAME,
+  DOMAIN,
+  ADDRESS_LINE,
+  PHONE_DISPLAY,
+  EMAIL,
+  NON_SHARING_CLAUSE,
+  NONMARKETING_USE_CASE,
+  MARKETING_MSG_TYPES,
+  POLICY_EFFECTIVE_DATE,
+} from '../config';
+---
+
+<Base title="Privacy Policy" description={`How ${LEGAL_NAME} collects, uses, and protects your information, including our SMS / text messaging practices.`}>
+  <PageHero eyebrow="Legal" title="Privacy Policy" lede={`Effective date: ${POLICY_EFFECTIVE_DATE}`} />
+
+  <article class="container-x prose-legal max-w-3xl py-14">
+    <p>
+      This Privacy Policy describes how {LEGAL_NAME} ("we", "us", or "our") collects, uses, and protects personal information when you visit https://{DOMAIN}/ (the "Site") or contact us for insurance products and services.
+    </p>
+
+    <h2>Information we collect</h2>
+    <ul>
+      <li><strong>Information you provide:</strong> name, email address, phone number, ZIP code, product interest, preferred contact time, messages you send us, and any information you share while requesting a quote or applying for coverage.</li>
+      <li><strong>Consent records:</strong> if you opt in to text messages, we record which consent you selected, the exact consent language shown to you, the date and time, and the page where you opted in.</li>
+      <li><strong>Technical information:</strong> browser type, device type, and the pages you visit, collected through standard server logs.</li>
+    </ul>
+
+    <h2>How we use information</h2>
+    <ul>
+      <li>To respond to your quote request and communicate with you about insurance options</li>
+      <li>To submit applications to insurance carriers you choose and to service your policy</li>
+      <li>To send text messages only if you have opted in, as described below</li>
+      <li>To comply with insurance regulations and other legal obligations</li>
+      <li>To maintain the security and performance of the Site</li>
+    </ul>
+
+    <h2 id="sms">SMS / Text Messaging</h2>
+    <p>{NON_SHARING_CLAUSE}</p>
+    <p>
+      If you opt in through the checkboxes on our quote form, we may send you: (a) non-marketing text messages about {NONMARKETING_USE_CASE}; and/or (b) marketing text messages about {MARKETING_MSG_TYPES}, depending on which consent you selected. Message frequency may vary. Message &amp; data rates may apply.
+    </p>
+    <p>
+      You can opt out at any time by replying STOP to any message we send. For help, reply HELP, email {EMAIL}, or call {PHONE_DISPLAY}. Consent to receive text messages is not a condition of purchase.
+    </p>
+
+    <h2>Sharing of information</h2>
+    <p>
+      We share personal information only as needed to provide the services you request: with the insurance carriers you choose to apply with, with service providers that help us operate the Site and our customer relationship tools under confidentiality obligations, and when required by law. We do not sell personal information.
+    </p>
+
+    <h2>Retention</h2>
+    <p>
+      We keep personal information for as long as needed to serve you and to meet insurance record-keeping requirements, which can extend several years after a policy ends. Text messaging consent records are kept for as long as we send you messages and for a reasonable period afterward to demonstrate compliance.
+    </p>
+
+    <h2>Security</h2>
+    <p>
+      We use reasonable administrative, technical, and physical safeguards to protect personal information, including encrypted connections (HTTPS) and access controls. No method of transmission or storage is completely secure, and we cannot guarantee absolute security.
+    </p>
+
+    <h2>Cookies and analytics</h2>
+    <p>
+      The Site does not use third-party advertising trackers. We may use essential cookies required for the Site to function. If we add analytics tools in the future, we will update this policy.
+    </p>
+
+    <h2>California residents</h2>
+    <p>
+      Under the California Consumer Privacy Act, as amended by the California Privacy Rights Act, California residents have the right to know what personal information we collect and how it is used, to request deletion or correction, to opt out of the sale or sharing of personal information, and not to be discriminated against for exercising these rights. We do not sell personal information and do not share it for cross-context behavioral advertising. To exercise your rights, contact us using the details below. We will verify your identity before responding.
+    </p>
+
+    <h2>Children</h2>
+    <p>The Site is not directed to individuals under 18, and we do not knowingly collect personal information from anyone under 18.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>We may update this Privacy Policy from time to time. The effective date at the top shows when it was last revised. Continued use of the Site after changes means you accept the updated policy.</p>
+
+    <h2>Contact us</h2>
+    <p>
+      {LEGAL_NAME}<br />
+      {ADDRESS_LINE}<br />
+      Phone: {PHONE_DISPLAY}<br />
+      Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+    </p>
+  </article>
+</Base>

@@ -1,0 +1,39 @@
+{
+  "name": "americlear-insurance-site",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "a2p-check": "node scripts/a2p-check.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "screenshots": "node scripts/screenshots.mjs",
+    "icons": "node scripts/icons.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/playfair-display": "^5.3.0",
+    "@fontsource-variable/source-sans-3": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.5",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  },
+  "allowScripts": {
+    "esbuild": true
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "cheerio": "^1.2.0",
+    "playwright": "^1.63.0",
+    "png-to-ico": "^3.0.2",
+    "sharp": "^0.35.4"
+  }
+}

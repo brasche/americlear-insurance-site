@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import { PRODUCTS } from '../config';
+---
+
+<Base title="Page not found" description="The page you requested could not be found.">
+  <section class="hero-texture text-ivory">
+    <div class="container-x py-24 text-center">
+      <p class="eyebrow !text-gold-light">Error 404</p>
+      <h1 class="mt-3 text-4xl !text-ivory sm:text-5xl">We couldn't find that page</h1>
+      <p class="mx-auto mt-4 max-w-xl text-ivory/85">The link may be out of date or the address may have been typed incorrectly. Here are a few places to go next.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/" class="btn btn-gold">Home</a>
+        <a href="/quote/" class="btn btn-outline-light">Get a Quote</a>
+        <a href="/contact/" class="btn btn-outline-light">Contact</a>
+      </div>
+      <nav aria-label="Products" class="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+        {PRODUCTS.map((p) => <a class="text-gold-light underline underline-offset-2" href={`/${p.slug}/`}>{p.name}</a>)}
+      </nav>
+    </div>
+  </section>
+</Base>

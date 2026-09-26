@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+const items = [
+  { icon: 'shield', label: 'Licensed & independent', text: 'A licensed agency that is not tied to any single carrier.' },
+  { icon: 'compass', label: 'Carrier choice', text: 'We compare options from multiple carriers so you can choose.' },
+  { icon: 'handshake', label: 'No-pressure guidance', text: 'Plain answers, real timelines, and no obligation to buy.' },
+  { icon: 'family', label: 'Local team, national reach', text: 'Based in Costa Mesa, California, serving clients by phone and email.' },
+] as const;
+---
+
+<section aria-labelledby="why-heading" class="border-y border-parchment bg-white">
+  <div class="container-x py-12">
+    <p class="eyebrow">Why AmeriClear</p>
+    <h2 id="why-heading" class="mt-2 text-2xl sm:text-3xl">Insurance guidance you can actually follow</h2>
+    <span class="gold-rule mt-4"></span>
+    <ul class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {items.map((it) => (
+        <li class="flex gap-4">
+          <span class="mt-0.5 shrink-0 text-gold"><Icon name={it.icon} class="h-8 w-8" /></span>
+          <div>
+            <p class="font-serif text-lg text-navy">{it.label}</p>
+            <p class="mt-1 text-sm text-slate">{it.text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

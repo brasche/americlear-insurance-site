@@ -1,0 +1,50 @@
+---
+/**
+ * SMS / Text Messaging Terms — Appendix A.2 clauses in the required order.
+ * Rendered on both /terms/ and /sms-terms/ so the two stay in sync.
+ */
+import {
+  LEGAL_NAME,
+  NONMARKETING_USE_CASE,
+  MARKETING_MSG_TYPES,
+  PHONE_DISPLAY,
+  EMAIL,
+  DOMAIN,
+} from '../config';
+interface Props {
+  headingLevel?: 'h1' | 'h2';
+}
+const { headingLevel = 'h2' } = Astro.props;
+const H = headingLevel;
+---
+
+<section id="sms-terms" class="prose-legal">
+  <H>SMS / Text Messaging Terms</H>
+
+  <h3>Program description</h3>
+  <p>
+    {LEGAL_NAME} ("we", "us") offers a text messaging program for customers and prospective customers who opt in. By opting in through our website form or by texting us, you agree to receive: (a) non-marketing text messages about {NONMARKETING_USE_CASE}, and/or (b) marketing text messages about {MARKETING_MSG_TYPES}, according to the consent you selected.
+  </p>
+
+  <h3>Opting out and getting help</h3>
+  <p>
+    You can cancel the SMS service at any time. Just text "STOP" to {PHONE_DISPLAY}. After you send the SMS message "STOP" to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us. If you want to join again, just sign up as you did the first time and we will start sending SMS messages to you again. If you are experiencing issues with the messaging program you can reply with the keyword HELP for more assistance, or you can get help directly at {EMAIL} or {PHONE_DISPLAY}.
+  </p>
+
+  <h3>Carriers</h3>
+  <p>Carriers are not liable for delayed or undelivered messages.</p>
+
+  <h3>Message frequency and rates</h3>
+  <p>
+    As always, message and data rates may apply for any messages sent to you from us and to us from you. Message frequency varies depending on your interaction with us; you will receive no more than 4 messages per week. If you have any questions about your text plan or data plan, it is best to contact your wireless provider.
+  </p>
+
+  <h3>Privacy</h3>
+  <p>
+    If you have any questions regarding privacy, please read our privacy policy:
+    <a href={`https://${DOMAIN}/privacy-policy/`}>https://{DOMAIN}/privacy-policy/</a>
+  </p>
+
+  <h3>Consent is not a condition of purchase</h3>
+  <p>Consent to receive text messages is not a condition of purchasing any goods or services.</p>
+</section>

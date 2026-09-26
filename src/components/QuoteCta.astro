@@ -1,0 +1,24 @@
+---
+import { PHONE, PHONE_TEL } from '../config';
+interface Props {
+  title?: string;
+  text?: string;
+}
+const {
+  title = 'Ready to compare your options?',
+  text = 'Tell us a little about yourself and a licensed agent will follow up with choices that fit. No obligation.',
+} = Astro.props;
+---
+
+<section class="hero-texture text-ivory">
+  <div class="container-x flex flex-col items-start gap-6 py-14 md:flex-row md:items-center md:justify-between">
+    <div>
+      <h2 class="text-2xl !text-ivory sm:text-3xl">{title}</h2>
+      <p class="mt-2 max-w-xl text-ivory/85">{text}</p>
+    </div>
+    <div class="flex flex-wrap gap-3">
+      <a href="/quote/" class="btn btn-gold">Get a Quote</a>
+      {PHONE ? <a href={PHONE_TEL} class="btn btn-outline-light">Call {PHONE}</a> : <a href="/contact/" class="btn btn-outline-light">Contact Us</a>}
+    </div>
+  </div>
+</section>

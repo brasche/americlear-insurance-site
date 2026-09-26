@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import QuoteCta from '../components/QuoteCta.astro';
+---
+
+<Base
+  title="Life Insurance"
+  description="Term, whole life, and indexed universal life explained in plain English: who each type fits, how underwriting works, and what to bring to a quote."
+>
+  <PageHero
+    eyebrow="Life Insurance"
+    title="Protection for the people who depend on you"
+    lede="Life insurance replaces income, pays off debts, and covers final costs so your family is not left carrying them. We help you match the type and amount to your situation."
+  />
+
+  <article class="container-x content max-w-3xl py-14">
+    <h2>Term life</h2>
+    <p>
+      Term life covers you for a set period, commonly 10, 20, or 30 years, and pays a benefit if you pass away during that time. It is usually the most affordable way to buy a large amount of coverage. It fits people with a clear window of need: a mortgage, young children, or years of income to protect before retirement. Most term policies can be converted to permanent coverage later, within limits set by the carrier.
+    </p>
+
+    <h2>Whole life</h2>
+    <p>
+      Whole life is permanent coverage with level premiums and a guaranteed death benefit as long as premiums are paid. It builds cash value on a schedule set by the carrier. It fits people who want certainty, a benefit that will always be there for final expenses or an inheritance, or a policy that never needs to be re-qualified for. The trade-off is a higher premium per dollar of coverage than term.
+    </p>
+
+    <h2>Indexed universal life (IUL)</h2>
+    <p>
+      IUL is flexible permanent coverage where cash value growth is tied to the movement of a market index, subject to caps and floors set by the carrier. Premiums can be adjusted within a range. It fits people who want permanent protection with flexibility and who understand that policy performance depends on index results and carrier terms. It requires more attention over time than whole life and is not right for everyone.
+    </p>
+
+    <h2>How underwriting generally works</h2>
+    <p>
+      Carriers price coverage based on age, health history, tobacco use, occupation, and the amount requested. Depending on the carrier and amount, underwriting may involve a health questionnaire, a phone interview, prescription and medical record checks, or a brief paramedical exam. Some products offer simplified or accelerated underwriting with no exam. Decisions typically take a few days to a few weeks. Coverage is subject to underwriting approval, and the rate offered may differ from the initial quote.
+    </p>
+
+    <h2>What to bring to a quote</h2>
+    <ul>
+      <li>Your date of birth and the coverage amount or goal you have in mind</li>
+      <li>A general summary of your health history and any medications</li>
+      <li>Whether you use tobacco or nicotine products</li>
+      <li>Who you would name as beneficiaries</li>
+      <li>Any existing policies, including group coverage through work</li>
+    </ul>
+    <p>
+      From there we compare options across the carriers we work with, explain the differences, and help you apply for the one you choose.
+    </p>
+  </article>
+
+  <QuoteCta title="Get a life insurance quote" />
+</Base>

@@ -1,0 +1,78 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { NAV, PHONE, PHONE_TEL } from '../config';
+const current = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 border-b border-gold/30 bg-navy text-ivory">
+  <div class="container-x flex min-h-[72px] items-center justify-between gap-4">
+    <a href="/" class="flex shrink-0 items-center" aria-label="AmeriClear Insurance Agency home">
+      <Logo variant="horizontal" tone="light" class="h-11 w-auto" />
+    </a>
+
+    <nav aria-label="Primary" class="hidden items-center gap-6 min-[900px]:flex">
+      {NAV.map((n) => (
+        <a
+          href={n.href}
+          aria-current={current === n.href ? 'page' : undefined}
+          class:list={[
+            'py-2 text-[0.95rem] font-semibold tracking-wide transition-colors hover:text-gold-light',
+            current === n.href ? 'text-gold-light' : 'text-ivory',
+          ]}
+        >
+          {n.label}
+        </a>
+      ))}
+      {PHONE ? (
+        <a href={PHONE_TEL} class="btn btn-gold !min-h-11 !px-4 !py-2 text-sm"><Icon name="phone" class="mr-2 h-4 w-4" />Call {PHONE}</a>
+      ) : (
+        <a href="/quote/" class="btn btn-gold !min-h-11 !px-4 !py-2 text-sm">Get a Quote</a>
+      )}
+    </nav>
+
+    <button
+      id="nav-toggle"
+      type="button"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-sm border border-gold/50 min-[900px]:hidden"
+      aria-controls="mobile-nav"
+      aria-expanded="false"
+      aria-label="Open menu"
+    >
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <path class="bar-open" d="M4 7h16M4 12h16M4 17h16" />
+        <path class="bar-close hidden" d="M6 6l12 12M18 6 6 18" />
+      </svg>
+    </button>
+  </div>
+
+  <nav id="mobile-nav" aria-label="Mobile" class="hidden border-t border-gold/30 bg-navy-deep min-[900px]:hidden" hidden>
+    <ul class="container-x flex flex-col py-3">
+      {NAV.map((n) => (
+        <li>
+          <a href={n.href} class="block py-3 text-lg font-semibold text-ivory hover:text-gold-light" aria-current={current === n.href ? 'page' : undefined}>{n.label}</a>
+        </li>
+      ))}
+      <li class="mt-2 mb-2 flex flex-col gap-3">
+        <a href="/quote/" class="btn btn-gold w-full">Get a Quote</a>
+        {PHONE && <a href={PHONE_TEL} class="btn btn-outline-light w-full">Call {PHONE}</a>}
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('mobile-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      toggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+      nav.classList.toggle('hidden', open);
+      nav.hidden = open;
+      toggle.querySelector('.bar-open')?.classList.toggle('hidden', !open);
+      toggle.querySelector('.bar-close')?.classList.toggle('hidden', open);
+    });
+  }
+</script>

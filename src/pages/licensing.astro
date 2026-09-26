@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+import { LEGAL_NAME, BRAND_NAME, LICENSE_LINE, STATES, ADDRESS_LINE, PHONE_DISPLAY, EMAIL } from '../config';
+---
+
+<Base title="Licensing & Disclosures" description={`Licensing information and important disclosures for ${LEGAL_NAME}.`}>
+  <PageHero eyebrow="Legal" title="Licensing & Disclosures" />
+
+  <article class="container-x prose-legal max-w-3xl py-14">
+    <h2 class="!mt-0">Licensing</h2>
+    <p>
+      {BRAND_NAME} is the trade name of {LEGAL_NAME}, an independent insurance agency.<br />
+      {LICENSE_LINE}<br />
+      {STATES}
+    </p>
+    <p>
+      You can verify a California license through the California Department of Insurance license lookup at
+      <a href="https://www.insurance.ca.gov/" rel="noopener">insurance.ca.gov</a>.
+    </p>
+
+    <h2>General disclosures</h2>
+    <ul>
+      <li>Insurance products are offered through licensed insurance carriers. {LEGAL_NAME} is an agency, not an insurer, and does not itself issue policies or pay claims.</li>
+      <li>Product availability varies by state. Not all products are available in all states or to all applicants.</li>
+      <li>All coverage is subject to underwriting approval. Quotes are estimates; the premium and terms of the issued policy control.</li>
+      <li>Nothing on this website is tax or legal advice. Consult a qualified professional regarding your individual circumstances.</li>
+      <li>Annuity and life insurance guarantees are backed by the claims-paying ability of the issuing carrier.</li>
+      <li>Not affiliated with the U.S. government or the federal Medicare program.</li>
+    </ul>
+
+    <h2>Medicare disclosure</h2>
+    <Disclaimer />
+
+    <h2>Contact</h2>
+    <p>
+      {LEGAL_NAME}<br />
+      {ADDRESS_LINE}<br />
+      Phone: {PHONE_DISPLAY}<br />
+      Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+    </p>
+  </article>
+</Base>

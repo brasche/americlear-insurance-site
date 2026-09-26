@@ -1,0 +1,239 @@
+---
+/**
+ * A2P 10DLC opt-in form. Native HTML, no iframes.
+ * Two separate, unchecked, optional consent checkboxes with exact label text
+ * from src/config.ts. Policy links + "not a condition of purchase" line sit
+ * directly beneath the submit button, inside the form.
+ */
+import {
+  PRODUCTS,
+  CONSENT_MARKETING_TEXT,
+  CONSENT_NONMARKETING_TEXT,
+  FORM_ENDPOINT,
+  FORM_VERSION,
+  PHONE,
+  PHONE_TEL,
+  EMAIL,
+} from '../config';
+
+interface Props {
+  id?: string;
+  heading?: string;
+  intro?: string;
+}
+const { id = 'quote-form', heading = 'Request a Quote', intro } = Astro.props;
+---
+
+<div class="card !p-6 sm:!p-8" id={`${id}-wrap`}>
+  <h2 class="text-2xl sm:text-3xl">{heading}</h2>
+  {intro && <p class="mt-2 text-slate">{intro}</p>}
+
+  <form
+    id={id}
+    class="mt-6"
+    method="post"
+    action={FORM_ENDPOINT || '#'}
+    novalidate
+    data-quote-form
+    data-endpoint={FORM_ENDPOINT}
+    data-form-version={FORM_VERSION}
+    data-phone={PHONE}
+    data-phone-tel={PHONE_TEL}
+    data-email={EMAIL}
+  >
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="field">
+        <label for={`${id}-first`}>First name <span aria-hidden="true">*</span></label>
+        <input id={`${id}-first`} name="first_name" type="text" autocomplete="given-name" required />
+      </div>
+      <div class="field">
+        <label for={`${id}-last`}>Last name <span aria-hidden="true">*</span></label>
+        <input id={`${id}-last`} name="last_name" type="text" autocomplete="family-name" required />
+      </div>
+      <div class="field">
+        <label for={`${id}-email`}>Email <span aria-hidden="true">*</span></label>
+        <input id={`${id}-email`} name="email" type="email" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for={`${id}-phone`}>Phone <span aria-hidden="true">*</span></label>
+        <input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555" required aria-describedby={`${id}-phone-help`} />
+        <p id={`${id}-phone-help`} class="mt-1 text-xs text-slate">10-digit U.S. number.</p>
+      </div>
+      <div class="field">
+        <label for={`${id}-zip`}>ZIP code</label>
+        <input id={`${id}-zip`} name="zip" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" />
+      </div>
+      <div class="field">
+        <label for={`${id}-product`}>Product of interest</label>
+        <select id={`${id}-product`} name="product_interest">
+          <option value="">Select one</option>
+          {PRODUCTS.map((p) => <option value={p.name}>{p.name}</option>)}
+          <option value="Not sure yet">Not sure yet</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for={`${id}-time`}>Best time to call</label>
+        <select id={`${id}-time`} name="best_time">
+          <option value="">Select one</option>
+          <option>Morning (8–11 AM PT)</option>
+          <option>Midday (11 AM–2 PM PT)</option>
+          <option>Afternoon (2–6 PM PT)</option>
+          <option>Email me instead</option>
+        </select>
+      </div>
+      <div class="field sm:col-span-2">
+        <label for={`${id}-message`}>Message (optional)</label>
+        <textarea id={`${id}-message`} name="message" rows="3"></textarea>
+      </div>
+    </div>
+
+    <fieldset class="mt-6 border-t border-parchment pt-5">
+      <legend class="sr-only">Text message consent (optional)</legend>
+      <p class="mb-3 text-sm font-semibold text-navy">Text message preferences (optional)</p>
+
+      <div class="flex items-start gap-3">
+        <input id={`${id}-consent-marketing`} name="consent_marketing" type="checkbox" value="true" class="mt-1 h-5 w-5 shrink-0 accent-gold" />
+        <label for={`${id}-consent-marketing`} class="!text-sm !font-normal !text-ink">{CONSENT_MARKETING_TEXT}</label>
+      </div>
+
+      <div class="mt-4 flex items-start gap-3">
+        <input id={`${id}-consent-nonmarketing`} name="consent_nonmarketing" type="checkbox" value="true" class="mt-1 h-5 w-5 shrink-0 accent-gold" />
+        <label for={`${id}-consent-nonmarketing`} class="!text-sm !font-normal !text-ink">{CONSENT_NONMARKETING_TEXT}</label>
+      </div>
+    </fieldset>
+
+    <input type="hidden" name="consent_text_marketing" value={CONSENT_MARKETING_TEXT} />
+    <input type="hidden" name="consent_text_nonmarketing" value={CONSENT_NONMARKETING_TEXT} />
+    <input type="hidden" name="form_version" value={FORM_VERSION} />
+
+    <p class="mt-4 hidden rounded-sm border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-800" data-error role="alert"></p>
+
+    <button type="submit" class="btn btn-navy mt-6 w-full sm:w-auto" data-submit>Request My Quote</button>
+
+    <div class="mt-4 text-sm text-slate" data-form-legal>
+      <p>
+        By submitting, you agree to our{' '}
+        <a class="text-gold-text underline underline-offset-2" href="/privacy-policy/">Privacy Policy</a>,{' '}
+        <a class="text-gold-text underline underline-offset-2" href="/terms/">Terms &amp; Conditions</a>, and{' '}
+        <a class="text-gold-text underline underline-offset-2" href="/sms-terms/">SMS Terms</a>.
+      </p>
+      <p class="mt-1">Consent to receive text messages is not a condition of purchase.</p>
+    </div>
+  </form>
+
+  <div class="hidden" data-success role="status" aria-live="polite">
+    <div class="mt-6 rounded-sm border border-gold/40 bg-parchment p-6">
+      <h3 class="text-xl">Thank you. We received your request.</h3>
+      <p class="mt-2">A licensed agent will review what you shared and reach out during business hours to walk through your options. There is no obligation.</p>
+      <p class="mt-2 text-sm text-slate" data-success-sms>
+        If you opted in to text messages, you can reply STOP at any time to unsubscribe or HELP for assistance. Message frequency may vary; message and data rates may apply.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  type Payload = Record<string, string | boolean>;
+
+  function normalizePhone(raw: string): string | null {
+    let digits = raw.replace(/\D/g, '');
+    if (digits.length === 11 && digits.startsWith('1')) digits = digits.slice(1);
+    if (digits.length !== 10) return null;
+    if (digits[0] === '0' || digits[0] === '1') return null; // NANP area codes start 2–9
+    return `+1${digits}`;
+  }
+
+  async function dispatch(endpoint: string, payload: Payload): Promise<'ok' | 'opaque'> {
+    const body = JSON.stringify(payload);
+    try {
+      const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return 'ok';
+    } catch (err) {
+      console.error('[quote-form] first attempt failed, retrying with no-cors', err);
+      // Retry once with an opaque request. If this does not throw, the request was dispatched.
+      await fetch(endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body });
+      return 'opaque';
+    }
+  }
+
+  document.querySelectorAll<HTMLFormElement>('form[data-quote-form]').forEach((form) => {
+    const wrap = form.closest('div[id$="-wrap"]') as HTMLElement | null;
+    const errorEl = form.querySelector<HTMLElement>('[data-error]');
+    const submitBtn = form.querySelector<HTMLButtonElement>('[data-submit]');
+    const successEl = wrap?.querySelector<HTMLElement>('[data-success]');
+    const phone = form.dataset.phone || '';
+    const email = form.dataset.email || '';
+
+    const showError = (msg: string) => {
+      if (!errorEl) return;
+      errorEl.textContent = msg;
+      errorEl.classList.remove('hidden');
+      errorEl.focus?.();
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl?.classList.add('hidden');
+      const endpoint = form.dataset.endpoint || '';
+
+      const fd = new FormData(form);
+      const first = String(fd.get('first_name') || '').trim();
+      const last = String(fd.get('last_name') || '').trim();
+      const emailVal = String(fd.get('email') || '').trim();
+      const phoneE164 = normalizePhone(String(fd.get('phone') || ''));
+
+      if (!first || !last) return showError('Please enter your first and last name.');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) return showError('Please enter a valid email address.');
+      if (!phoneE164) return showError('Please enter a valid 10-digit U.S. phone number.');
+
+      const consentMarketing = fd.get('consent_marketing') === 'true';
+      const consentNonmarketing = fd.get('consent_nonmarketing') === 'true';
+
+      const payload: Payload = {
+        first_name: first,
+        last_name: last,
+        email: emailVal,
+        phone: phoneE164,
+        zip: String(fd.get('zip') || '').trim(),
+        product_interest: String(fd.get('product_interest') || ''),
+        best_time: String(fd.get('best_time') || ''),
+        message: String(fd.get('message') || '').trim(),
+        consent_marketing: consentMarketing,
+        consent_nonmarketing: consentNonmarketing,
+        consent_text_marketing: String(fd.get('consent_text_marketing') || ''),
+        consent_text_nonmarketing: String(fd.get('consent_text_nonmarketing') || ''),
+        consent_timestamp: new Date().toISOString(),
+        page_url: window.location.href,
+        user_agent: navigator.userAgent,
+        form_version: form.dataset.formVersion || '',
+      };
+
+      if (!endpoint) {
+        console.error('[quote-form] PUBLIC_FORM_ENDPOINT is not configured; submission not sent', payload);
+        const contact = phone ? `call ${phone} or email ${email}` : `email ${email}`;
+        return showError(`Our online form is not accepting submissions at the moment. Please ${contact} and we will help right away.`);
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+      }
+
+      try {
+        await dispatch(endpoint, payload);
+        form.classList.add('hidden');
+        successEl?.classList.remove('hidden');
+        successEl?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (err) {
+        console.error('[quote-form] submission failed after retry', err, payload);
+        const contact = phone ? `call us at ${phone} or email ${email}` : `email us at ${email}`;
+        showError(`We could not send your request. Please ${contact} and we will help right away.`);
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Request My Quote';
+        }
+      }
+    });
+  });
+</script>

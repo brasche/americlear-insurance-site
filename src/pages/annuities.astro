@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import QuoteCta from '../components/QuoteCta.astro';
+---
+
+<Base
+  title="Annuities"
+  description="Fixed and fixed-indexed annuities described conservatively: how they work, what they are designed to do, and why suitability depends on your circumstances."
+>
+  <PageHero
+    eyebrow="Annuities"
+    title="Predictable income for retirement"
+    lede="An annuity is a contract with an insurance company that turns a sum of money into guaranteed payments or protected growth. We describe them plainly and only recommend one when it fits."
+  />
+
+  <article class="container-x content max-w-3xl py-14">
+    <h2>What an annuity is</h2>
+    <p>
+      An annuity is a contract between you and an insurance carrier. You pay a lump sum or a series of payments, and in return the carrier promises either to grow that money on protected terms, to pay you income for a set period or for life, or both. Guarantees are backed by the claims-paying ability of the issuing carrier. Annuities are long-term products and usually include surrender charges if you withdraw more than the contract allows in the early years.
+    </p>
+
+    <h2>Fixed annuities</h2>
+    <p>
+      A fixed annuity credits a stated interest rate that the carrier guarantees for a set period, similar in spirit to a certificate of deposit but issued by an insurer and tax-deferred. Your principal is not exposed to market losses. Fixed annuities fit people who want simplicity and a known outcome for a portion of their savings.
+    </p>
+
+    <h2>Fixed-indexed annuities</h2>
+    <p>
+      A fixed-indexed annuity credits interest based on the movement of a market index, subject to caps, participation rates, or spreads that the carrier sets and can change within contract limits. Your principal is protected from index losses, but growth is limited by those terms, and you are not invested directly in the index. These contracts are more complex than fixed annuities and deserve a careful, unhurried explanation before you commit.
+    </p>
+
+    <h2>Suitability comes first</h2>
+    <p>
+      Whether any annuity is appropriate depends on your age, income needs, other assets, liquidity, tax situation, and time horizon. Money you may need in the near term generally does not belong in an annuity. We do not quote return figures, and we will not recommend a product without first understanding your circumstances. California requires agents to document suitability, and we take that requirement seriously.
+    </p>
+
+    <h2>Questions we will help you answer</h2>
+    <ul>
+      <li>How much of your savings, if any, should be in a guaranteed product?</li>
+      <li>Do you want income now, income later, or protected growth?</li>
+      <li>What surrender period and withdrawal provisions can you live with?</li>
+      <li>How does the contract interact with Social Security, pensions, and taxes?</li>
+    </ul>
+    <p>
+      Nothing on this page is tax or legal advice. Consider consulting a tax professional before purchasing an annuity.
+    </p>
+  </article>
+
+  <QuoteCta title="Discuss whether an annuity fits" text="Request a conversation with a licensed agent. No obligation, and we will tell you if it is not a fit." />
+</Base>

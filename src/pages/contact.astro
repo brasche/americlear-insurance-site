@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import Icon from '../components/Icon.astro';
+import { LEGAL_NAME, ADDRESS, PHONE, PHONE_DISPLAY, PHONE_TEL, EMAIL, HOURS } from '../config';
+---
+
+<Base
+  title="Contact"
+  description={`Contact ${LEGAL_NAME} in ${ADDRESS.city}, ${ADDRESS.state}: phone, email, address, and business hours, plus a quote request form.`}
+>
+  <PageHero eyebrow="Contact" title="We're glad to help" lede="Call, email, or send a quote request. A licensed agent will respond during business hours." />
+
+  <section class="container-x grid gap-10 py-14 lg:grid-cols-12">
+    <div class="lg:col-span-4">
+      <h2 class="text-2xl">Reach us directly</h2>
+      <span class="gold-rule mt-4"></span>
+      <address class="mt-6 space-y-5 not-italic">
+        <div class="flex gap-3">
+          <span class="text-gold"><Icon name="phone" class="h-6 w-6" /></span>
+          <div>
+            <p class="text-sm font-semibold text-navy">Phone</p>
+            {PHONE ? <a class="text-gold-text underline underline-offset-2" href={PHONE_TEL}>{PHONE}</a> : <p>{PHONE_DISPLAY}</p>}
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-gold"><Icon name="mail" class="h-6 w-6" /></span>
+          <div>
+            <p class="text-sm font-semibold text-navy">Email</p>
+            <a class="text-gold-text underline underline-offset-2" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-gold"><Icon name="pin" class="h-6 w-6" /></span>
+          <div>
+            <p class="text-sm font-semibold text-navy">Office</p>
+            <p>{LEGAL_NAME}<br />{ADDRESS.street}<br />{ADDRESS.city}, {ADDRESS.state} {ADDRESS.zip}</p>
+            <p class="mt-1 text-sm text-slate">In-person visits by appointment.</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <span class="text-gold"><Icon name="clock" class="h-6 w-6" /></span>
+          <div>
+            <p class="text-sm font-semibold text-navy">Hours</p>
+            <p>{HOURS}</p>
+          </div>
+        </div>
+      </address>
+    </div>
+    <div class="lg:col-span-8">
+      <QuoteForm id="contact-form" heading="Send a quote request" intro="Fields marked * are required. Text messaging is optional and never a condition of purchase." />
+    </div>
+  </section>
+</Base>

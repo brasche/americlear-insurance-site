@@ -1,0 +1,160 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/playfair-display/wght.css';
+@import '@fontsource-variable/source-sans-3/wght.css';
+
+@theme {
+  --color-navy: #0b1a33;
+  --color-navy-deep: #091229;
+  --color-ivory: #f6f3ec;
+  --color-parchment: #ede7da;
+  --color-gold: #b8923f;
+  --color-gold-light: #d6b96b;
+  --color-gold-text: #7a5e20; /* AA-safe gold for small text on ivory (~6:1) */
+  --color-ink: #1b2430;
+  --color-slate: #5b6675;
+  --font-serif: 'Playfair Display Variable', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Source Sans 3 Variable', 'Segoe UI', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+body {
+  @apply bg-ivory font-sans text-ink antialiased;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply font-serif text-navy;
+  line-height: 1.15;
+}
+
+.eyebrow {
+  @apply font-sans text-xs font-semibold uppercase text-gold-text;
+  letter-spacing: 0.18em;
+}
+
+.gold-rule {
+  @apply block h-px w-16 bg-gold;
+}
+
+.container-x {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+
+.btn {
+  @apply inline-flex min-h-11 items-center justify-center rounded-sm px-6 py-3 font-sans text-base font-semibold transition-colors;
+}
+.btn-gold {
+  @apply bg-gold text-navy-deep hover:bg-gold-light;
+}
+.btn-navy {
+  @apply bg-navy text-ivory hover:bg-navy-deep;
+}
+.btn-outline {
+  @apply border border-gold text-gold-text hover:bg-parchment;
+}
+.btn-outline-light {
+  @apply border border-gold-light text-ivory hover:bg-white/10;
+}
+
+.card {
+  @apply rounded-sm border border-parchment bg-white p-6 shadow-[0_2px_12px_rgba(9,18,41,0.06)];
+}
+
+.prose-legal h2 {
+  @apply mt-10 mb-3 text-2xl;
+}
+.prose-legal h3 {
+  @apply mt-6 mb-2 text-xl;
+}
+.prose-legal p,
+.prose-legal li {
+  @apply mb-3 text-ink;
+}
+.prose-legal ul {
+  @apply mb-4 list-disc pl-6;
+}
+.prose-legal ol {
+  @apply mb-4 list-decimal pl-6;
+}
+.prose-legal a {
+  @apply text-gold-text underline underline-offset-2;
+}
+
+.content h2 {
+  @apply mt-10 mb-3 text-2xl sm:text-3xl;
+}
+.content h3 {
+  @apply mt-6 mb-2 text-xl;
+}
+.content p {
+  @apply mb-4;
+}
+.content ul {
+  @apply mb-4 list-disc pl-6;
+}
+.content li {
+  @apply mb-1;
+}
+.content a {
+  @apply text-gold-text underline underline-offset-2;
+}
+
+.hero-texture {
+  background-color: var(--color-navy-deep);
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgba(184, 146, 63, 0.16) 0%, transparent 55%),
+    linear-gradient(160deg, var(--color-navy) 0%, var(--color-navy-deep) 100%);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-gold-light);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  @apply sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-gold focus:px-4 focus:py-2 focus:text-navy-deep;
+}
+
+.field input,
+.field select,
+.field textarea {
+  @apply w-full rounded-sm border border-slate/40 bg-white px-3 py-2.5 text-ink;
+  min-height: 44px;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  @apply border-gold;
+}
+.field label {
+  @apply mb-1 block text-sm font-semibold text-navy;
+}
+
+details summary {
+  cursor: pointer;
+  list-style: none;
+}
+details summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .faq-icon {
+  transform: rotate(45deg);
+}

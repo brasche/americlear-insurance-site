@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { BRAND_NAME, SITE_URL } from '../config';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Optional JSON-LD objects to emit in the head. */
+  jsonLd?: Record<string, unknown>[];
+  ogImage?: string;
+}
+const { title, description, jsonLd = [], ogImage = '/og-default.png' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+const fullTitle = title === BRAND_NAME ? title : `${title} | ${BRAND_NAME}`;
+const ogImageUrl = new URL(ogImage, SITE_URL).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0B1A33" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={BRAND_NAME} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {jsonLd.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
+
+    {/*
+      Analytics slot (intentionally disabled). To enable Google Tag Manager, set
+      PUBLIC_GTM_ID in the build environment and uncomment the block below.
+      No third-party scripts load by default.
+
+      {import.meta.env.PUBLIC_GTM_ID && (
+        <script is:inline define:vars={{ id: import.meta.env.PUBLIC_GTM_ID }}>
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+          var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+          j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer',id);
+        </script>
+      )}
+    */}
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import QuoteCta from '../components/QuoteCta.astro';
+import Icon from '../components/Icon.astro';
+import { BRAND_NAME, LEGAL_NAME, STATES, FOUNDED_LINE, ADDRESS } from '../config';
+const values = [
+  { icon: 'shield', title: 'Clarity', text: 'We explain options in plain language and put trade-offs on the table.' },
+  { icon: 'handshake', title: 'Independence', text: 'We are not tied to one carrier, so our recommendations are about fit, not quota.' },
+  { icon: 'document', title: 'Follow-through', text: 'We handle the application and stay available for service after the policy is issued.' },
+] as const;
+---
+
+<Base
+  title="About"
+  description={`${BRAND_NAME} is an independent, licensed insurance agency based in ${ADDRESS.city}, ${ADDRESS.state}. Learn how we work and what we stand for.`}
+>
+  <PageHero eyebrow="About us" title="An independent agency built on clear guidance" lede="AmeriClear exists to make insurance decisions understandable, so you can choose coverage with confidence instead of guesswork." />
+
+  <section class="container-x grid gap-12 py-14 lg:grid-cols-12">
+    <article class="content lg:col-span-7">
+      <h2 class="!mt-0">Our mission</h2>
+      <p>
+        Insurance protects the things people care about most, yet it is often sold in a way that leaves them unsure what they bought. {BRAND_NAME} was formed to change that experience. Our mission is to help individuals and families understand their options, compare them fairly, and choose coverage that genuinely fits their lives and budgets.
+      </p>
+
+      <h2>How the agency works</h2>
+      <p>
+        {LEGAL_NAME} is an independent insurance agency. That means we work with multiple insurance carriers rather than representing one company. When you request a quote, we gather options from the carriers we are contracted with, compare them against your goals, and explain the differences. You choose. We then guide the application, coordinate with the carrier during underwriting, and remain your point of contact for service questions, beneficiary changes, and reviews down the road.
+      </p>
+      <p>
+        We focus on life insurance, final expense coverage, Medicare options, and annuities. We do not offer every product or plan available, and we will tell you when something you need falls outside what we handle.
+      </p>
+
+      <h2>Where we work</h2>
+      <p>{STATES} Product availability varies by state and by carrier.</p>
+      {FOUNDED_LINE && <p>{FOUNDED_LINE}</p>}
+      <p>Our office is located in {ADDRESS.city}, {ADDRESS.state}, and we serve clients by phone, email, and video as well as in person by appointment.</p>
+    </article>
+
+    <aside class="lg:col-span-5">
+      <!-- Image slot: about page. See public/images/README.md -->
+      <div class="relative aspect-[4/3] w-full rounded-sm border border-gold/40 bg-navy p-6 text-ivory" aria-hidden="true">
+        <div class="absolute inset-4 border border-gold/25"></div>
+        <div class="flex h-full flex-col justify-end">
+          <p class="font-serif text-2xl text-ivory/90">Costa Mesa,<br />California</p>
+        </div>
+      </div>
+
+      <h2 class="mt-10 text-2xl">What we value</h2>
+      <ul class="mt-4 space-y-5">
+        {values.map((v) => (
+          <li class="flex gap-4">
+            <span class="mt-0.5 shrink-0 text-gold"><Icon name={v.icon} class="h-7 w-7" /></span>
+            <div>
+              <p class="font-serif text-lg text-navy">{v.title}</p>
+              <p class="text-sm text-slate">{v.text}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  </section>
+
+  <QuoteCta />
+</Base>

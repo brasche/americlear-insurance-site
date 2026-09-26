@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import Icon from '../components/Icon.astro';
+import { HOURS } from '../config';
+---
+
+<Base
+  title="Get a Quote"
+  description="Request a free, no-obligation insurance quote from AmeriClear Insurance Agency. A licensed agent will follow up during business hours. Text messaging is optional."
+>
+  <PageHero eyebrow="Get a quote" title="Request your free quote" lede="Share a few details and a licensed agent will reach out with options from the carriers we work with. There is no cost and no obligation." />
+
+  <section class="container-x grid gap-10 py-14 lg:grid-cols-12">
+    <div class="lg:col-span-4">
+      <h2 class="text-2xl">What to expect</h2>
+      <span class="gold-rule mt-4"></span>
+      <ul class="mt-6 space-y-4 text-slate">
+        <li class="flex gap-3"><span class="text-gold"><Icon name="check" class="h-6 w-6" /></span><span>A licensed agent reviews your request and contacts you during business hours ({HOURS}).</span></li>
+        <li class="flex gap-3"><span class="text-gold"><Icon name="check" class="h-6 w-6" /></span><span>We compare options from multiple carriers and explain the differences in plain English.</span></li>
+        <li class="flex gap-3"><span class="text-gold"><Icon name="check" class="h-6 w-6" /></span><span>You decide. If nothing fits, we will say so.</span></li>
+        <li class="flex gap-3"><span class="text-gold"><Icon name="check" class="h-6 w-6" /></span><span>Text messages are optional. Leave both boxes unchecked and we will only contact you by phone or email.</span></li>
+      </ul>
+    </div>
+    <div class="lg:col-span-8">
+      <QuoteForm id="quote-form" heading="Request a Quote" intro="Fields marked * are required. We will never share your mobile information with third parties for marketing purposes." />
+    </div>
+  </section>
+</Base>

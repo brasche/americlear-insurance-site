@@ -1,0 +1,13 @@
+---
+/** CMS TPMO disclaimer block (Appendix A.3), shown prominently on Medicare-related pages. */
+import { TPMO_DISCLAIMER } from '../config';
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+
+<aside class:list={['rounded-sm border-l-4 border-gold bg-parchment px-5 py-4 text-sm text-ink', cls]} aria-label="Medicare disclaimer" data-tpmo>
+  <p class="font-semibold text-navy">Medicare disclaimer</p>
+  <p class="mt-1">{TPMO_DISCLAIMER}</p>
+</aside>

@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SmsTerms from '../components/SmsTerms.astro';
+import { LEGAL_NAME, ADDRESS_LINE, PHONE_DISPLAY, EMAIL, POLICY_EFFECTIVE_DATE } from '../config';
+---
+
+<Base title="SMS Terms" description={`Text messaging terms for the ${LEGAL_NAME} SMS program: what we send, how to opt out, message frequency, and rates.`}>
+  <PageHero eyebrow="Legal" title="SMS / Text Messaging Terms" lede={`Effective date: ${POLICY_EFFECTIVE_DATE}`} />
+
+  <article class="container-x prose-legal max-w-3xl py-14">
+    <SmsTerms headingLevel="h2" />
+
+    <h2>Contact</h2>
+    <p>
+      {LEGAL_NAME}<br />
+      {ADDRESS_LINE}<br />
+      Phone: {PHONE_DISPLAY}<br />
+      Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+    </p>
+    <p>These SMS terms are also included in our <a href="/terms/">Terms &amp; Conditions</a>.</p>
+  </article>
+</Base>

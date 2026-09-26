@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import QuoteCta from '../components/QuoteCta.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+---
+
+<Base
+  title="Medicare"
+  description="Medicare Advantage, Medicare Supplement, and Part D explained neutrally, plus a plain-English guide to enrollment windows."
+>
+  <PageHero
+    eyebrow="Medicare"
+    title="Understanding your Medicare choices"
+    lede="Medicare has several parts and several ways to fill the gaps. We explain the options neutrally so you can decide what fits your health needs and budget."
+  />
+
+  <article class="container-x content max-w-3xl py-14">
+    <Disclaimer class="mb-8" />
+
+    <h2>Original Medicare: Parts A and B</h2>
+    <p>
+      Part A covers hospital stays and some skilled nursing and hospice care. Part B covers doctor visits, outpatient care, and preventive services. Together they are called Original Medicare. They do not cover everything, and there is no annual cap on what you can pay out of pocket, which is why many people add one of the options below.
+    </p>
+
+    <h2>Medicare Advantage (Part C)</h2>
+    <p>
+      Medicare Advantage plans are offered by private insurance companies approved by Medicare and bundle Part A and Part B, often with prescription drug coverage and extras such as dental or vision. Plans generally use provider networks and may require referrals or prior authorization. They include an annual out-of-pocket maximum. Premiums, networks, and benefits vary by plan and county.
+    </p>
+
+    <h2>Medicare Supplement (Medigap)</h2>
+    <p>
+      Medigap policies work alongside Original Medicare and help pay some of the costs Original Medicare leaves behind, such as deductibles and coinsurance. Plans are standardized by letter, so a given plan letter offers the same basic benefits regardless of which insurer sells it. Medigap does not include drug coverage, so it is usually paired with a Part D plan. You can generally see any provider that accepts Medicare.
+    </p>
+
+    <h2>Prescription drug coverage (Part D)</h2>
+    <p>
+      Part D plans are sold by private insurers and cover prescription medications. Each plan has its own formulary, pharmacy network, and cost structure. Comparing plans against the specific medications you take usually matters more than the premium alone.
+    </p>
+
+    <h2>Enrollment windows, in general terms</h2>
+    <ul>
+      <li><strong>Initial Enrollment Period (IEP):</strong> the seven-month window around your 65th birthday, beginning three months before the month you turn 65.</li>
+      <li><strong>Annual Enrollment Period (AEP):</strong> October 15 through December 7 each year, when you can join, switch, or drop Medicare Advantage and Part D plans for coverage starting January 1.</li>
+      <li><strong>Medicare Advantage Open Enrollment Period (OEP):</strong> January 1 through March 31, when people already in a Medicare Advantage plan can make one change.</li>
+      <li><strong>Special Enrollment Periods:</strong> available after certain life events, such as moving or losing employer coverage.</li>
+    </ul>
+    <p>
+      Rules and dates are set by the Centers for Medicare &amp; Medicaid Services and can change. We will confirm what applies to you before any enrollment.
+    </p>
+
+    <Disclaimer class="mt-8" />
+  </article>
+
+  <QuoteCta title="Talk through your Medicare options" text="Request a call and a licensed agent will review the plans we offer in your area." />
+</Base>
