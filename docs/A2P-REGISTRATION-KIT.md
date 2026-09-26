@@ -108,14 +108,14 @@ The form POSTs flat JSON to `PUBLIC_FORM_ENDPOINT`:
 3. Add an **IF** node: if `consent_marketing` is true → add tag `sms-marketing-consent`. Add a second IF: if `consent_nonmarketing` is true → add tag `sms-nonmarketing-consent`.
 4. If neither flag is true, leave the contact's SMS DND on (do not text them).
 5. Activate the workflow and copy the **Production** webhook URL (not the Test URL).
-6. Set the secret and redeploy: `gh secret set PUBLIC_FORM_ENDPOINT --repo brasche/americlear-insurance-site --body "<production URL>"` then `gh workflow run deploy.yml --repo brasche/americlear-insurance-site`.
+6. Set the Railway variable, which triggers a rebuild: `railway variable set PUBLIC_FORM_ENDPOINT="<production URL>"` (or dashboard → service → Variables).
 
 ### Option A: GoHighLevel inbound webhook
 
 1. Automation → Workflows → Create Workflow → trigger **Inbound Webhook** → copy the webhook URL.
 2. Submit a test lead once so GHL learns the field names, then map them to contact fields.
 3. Add **If/Else** steps on `consent_marketing` and `consent_nonmarketing` to add the tags above; leave DND on when neither is true.
-4. Publish the workflow and set the secret as in step 6 above.
+4. Publish the workflow and set the Railway variable as in step 6 above.
 
 ## 10. Common rejection reasons and how this site addresses each
 

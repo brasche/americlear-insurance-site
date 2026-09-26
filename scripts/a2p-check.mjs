@@ -255,8 +255,9 @@ for (const [r, { $ }] of docs) {
 (broken.length === 0 ? ok : fail)('all internal links resolve', broken.join('; ') || 'ok');
 ((await loadText('/sitemap-index.xml')) ? ok : fail)('sitemap-index.xml exists', '/sitemap-index.xml');
 ((await loadText('/robots.txt')) ? ok : fail)('robots.txt exists', '/robots.txt');
+// CNAME is only used by GitHub Pages hosting; on Railway the domain is set in the dashboard.
 const cname = BASE ? null : await loadText('/CNAME');
-if (!BASE) ((cname || '').trim() === DOMAIN ? ok : fail)('CNAME equals DOMAIN', cname);
+if (!BASE && cname !== null) (cname.trim() === DOMAIN ? ok : fail)('CNAME equals DOMAIN', cname);
 
 // ---- output ----
 const pad = (s, n) => String(s).padEnd(n);

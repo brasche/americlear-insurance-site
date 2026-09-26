@@ -1,0 +1,57 @@
+# Custom Caddyfile for Railway (Railpack Node/Astro static provider).
+# Based on Railpack's default template, plus: branded 404 page and www -> apex redirect.
+# {{.DIST_DIR}} is filled in by Railpack (/app/dist).
+{
+	admin off
+	persist_config off
+	auto_https off
+
+	log {
+		format json
+	}
+
+	servers {
+		trusted_proxies static private_ranges 100.0.0.0/8
+	}
+}
+
+:{$PORT:80} {
+	log {
+		format json
+	}
+
+	respond /health 200
+
+	# Redirect www to the apex domain (Railway terminates TLS; the target is always https).
+	@www host www.americlearinsurance.com
+	redir @www https://americlearinsurance.com{uri} permanent
+
+	header {
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		-Server
+	}
+
+	root * {{.DIST_DIR}}
+
+	file_server {
+		hide .git
+		hide .env*
+	}
+
+	encode {
+		gzip
+		zstd
+	}
+
+	# /about -> /about/index.html etc. No SPA fallback: unknown routes must 404.
+	try_files {path} {path}.html {path}/index.html
+
+	# Serve Astro's branded 404 page for missing routes.
+	handle_errors {
+		rewrite * /{err.status_code}.html
+		file_server
+	}
+}

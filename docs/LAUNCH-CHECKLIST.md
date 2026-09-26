@@ -13,11 +13,10 @@ Items are ordered shortest-first. Everything else on the site is complete and ve
 
 ## 2. Form endpoint (required for the form to deliver)
 
-`PUBLIC_FORM_ENDPOINT` is not set yet, so the form shows a friendly error with the agency email instead of sending. Follow the N8N or GoHighLevel setup in `docs/A2P-REGISTRATION-KIT.md` section 9, then:
+`PUBLIC_FORM_ENDPOINT` is not set yet, so the form shows a friendly error with the agency email instead of sending. Follow the N8N or GoHighLevel setup in `docs/A2P-REGISTRATION-KIT.md` section 9, then set the Railway variable (this triggers a rebuild automatically):
 
 ```bash
-gh secret set PUBLIC_FORM_ENDPOINT --repo brasche/americlear-insurance-site --body "<production webhook URL>"
-gh workflow run deploy.yml --repo brasche/americlear-insurance-site
+railway variable set PUBLIC_FORM_ENDPOINT="<production webhook URL>"
 ```
 
 Then run the two end-to-end test submissions (both boxes checked, then no boxes checked) and confirm the contacts and tags in GoHighLevel.
@@ -42,6 +41,6 @@ Two styled slots are reserved. See `public/images/README.md`.
 
 No third-party scripts load. A commented, env-gated Google Tag Manager slot is in `src/layouts/Base.astro`. If you enable it, update the cookies section of the privacy policy.
 
-## 8. Domain takeover protection (recommended)
+## 8. Cloudflare hygiene (recommended)
 
-GitHub → Settings → Pages → "Add a domain" under Verified domains → add `americlearinsurance.com` → add the TXT record GitHub shows at GoDaddy → Verify.
+DNS lives at Cloudflare because GoDaddy cannot point a root domain at Railway. Keep SSL/TLS mode on **Full** (not Full Strict), keep "Always Use HTTPS" on, and leave the Railway CNAME records proxied or DNS-only consistently (do not mix).

@@ -1,6 +1,6 @@
 # AmeriClear Insurance Agency website
 
-Marketing website for AmeriClear Insurance Agency LLC, built to pass A2P 10DLC brand and campaign review (Twilio / TCR / GoHighLevel LC-Phone). Static site: Astro + Tailwind CSS, deployed to GitHub Pages at https://americlearinsurance.com.
+Marketing website for AmeriClear Insurance Agency LLC, built to pass A2P 10DLC brand and campaign review (Twilio / TCR / GoHighLevel LC-Phone). Static site: Astro + Tailwind CSS, deployed on Railway at https://americlearinsurance.com.
 
 ## Run locally
 
@@ -37,12 +37,13 @@ Do not edit the consent, non-sharing, or SMS terms wording. Those strings are re
 Submissions POST JSON to `PUBLIC_FORM_ENDPOINT`. It is injected at build time.
 
 - Locally: put it in `.env` (git-ignored).
-- In production: set the GitHub Actions secret and redeploy.
+- In production: set the Railway service variable and redeploy (Railway rebuilds automatically when a variable changes).
 
 ```bash
-gh secret set PUBLIC_FORM_ENDPOINT --repo brasche/americlear-insurance-site --body "https://your-n8n-host/webhook/americlear-quote"
-gh workflow run deploy.yml --repo brasche/americlear-insurance-site
+railway variable set PUBLIC_FORM_ENDPOINT="https://your-n8n-host/webhook/americlear-quote"
 ```
+
+Or in the Railway dashboard: service → Variables → New Variable.
 
 See `docs/A2P-REGISTRATION-KIT.md` for the payload fields and the GoHighLevel tagging logic.
 
@@ -52,7 +53,9 @@ See `public/images/README.md`. Two styled slots are reserved (home hero, about p
 
 ## How deploys work
 
-Every push to `main` runs `.github/workflows/deploy.yml`: it builds with `withastro/action`, runs `npm run a2p-check` against the build (a failing check blocks the deploy), then publishes to GitHub Pages. The custom domain is set by `public/CNAME` and in the repo's Pages settings.
+The Railway service is connected to this GitHub repo. Every push to `main` triggers a Railway build using `railway.json`: `npm run build && npm run a2p-check` (a failing compliance check blocks the deploy). Railway's builder detects the Astro static output and serves `dist/` with Caddy using `Caddyfile.template` (branded 404 page, www → apex redirect, security headers). You can also deploy the working directory directly with `railway up`.
+
+The custom domain is configured in Railway (service → Settings → Networking → Custom Domain) and DNS lives at Cloudflare.
 
 ## Structure
 
@@ -65,5 +68,7 @@ scripts/a2p-check.mjs      compliance assertions (Appendix C)
 scripts/smoke.mjs          Playwright smoke test
 scripts/screenshots.mjs    form screenshots for the registration kit
 scripts/icons.mjs          generates favicons and OG image from the SVG wordmark
+railway.json               Railway build/deploy config (build + compliance gate)
+Caddyfile.template         static server config used by Railway
 docs/                      registration kit, launch checklist, compliance report, screenshots
 ```
