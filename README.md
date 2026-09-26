@@ -1,6 +1,6 @@
 # AmeriClear Insurance Agency website
 
-Marketing website for AmeriClear Insurance Agency LLC, built to pass A2P 10DLC brand and campaign review (Twilio / TCR / GoHighLevel LC-Phone). Static site: Astro + Tailwind CSS, deployed on Railway at https://americlearinsurance.com.
+Marketing website for AmeriClear Insurance Agency LLC, built to pass A2P 10DLC brand and campaign review (Twilio / TCR / GoHighLevel LC-Phone). Static site: Astro + Tailwind CSS, deployed on Railway at https://www.americlearinsurance.com.
 
 ## Run locally
 
@@ -16,7 +16,7 @@ npm run dev               # http://localhost:4321
 npm run build             # static build to dist/ + compliance check (fails on any violation)
 npm run check             # Astro + TypeScript check
 npm run a2p-check         # compliance assertions against dist/ only
-npm run a2p-check -- --url https://americlearinsurance.com --report docs/COMPLIANCE-REPORT.md
+npm run a2p-check -- --url https://www.americlearinsurance.com --report docs/COMPLIANCE-REPORT.md
 npm run preview           # then, in another terminal:
 npm run smoke -- --base http://localhost:4321
 npm run screenshots -- --base http://localhost:4321
@@ -57,7 +57,7 @@ The site runs on Railway (project `americlear-insurance-site`, service of the sa
 
 Deploy from this folder with `railway up` (the folder is linked to the project). If the Railway service is connected to the GitHub repo (service → Settings → Source), every push to `main` also deploys automatically.
 
-The custom domain is configured in Railway (service → Settings → Networking → Custom Domain) and DNS lives at Cloudflare.
+The custom domain `www.americlearinsurance.com` is configured in Railway (service → Settings → Networking → Custom Domain). DNS is at GoDaddy: a `www` CNAME to Railway plus domain forwarding from the bare domain to `https://www.americlearinsurance.com`.
 
 ## Structure
 

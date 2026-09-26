@@ -9,7 +9,7 @@ Items are ordered shortest-first. Everything else on the site is complete and ve
 1. In GoHighLevel, buy the LC-Phone number you will register for texting.
 2. Edit `src/config.ts`: `export const PHONE: string = '(714) 555-0100';` (use the real number in this display format).
 3. Commit and push. The site redeploys in about two minutes.
-4. Confirm the footer on https://americlearinsurance.com shows the number, then submit the A2P brand and campaign. The number on the site must match the number you register.
+4. Confirm the footer on https://www.americlearinsurance.com shows the number, then submit the A2P brand and campaign. The number on the site must match the number you register.
 
 ## 2. Form endpoint (required for the form to deliver)
 
@@ -41,6 +41,6 @@ Two styled slots are reserved. See `public/images/README.md`.
 
 No third-party scripts load. A commented, env-gated Google Tag Manager slot is in `src/layouts/Base.astro`. If you enable it, update the cookies section of the privacy policy.
 
-## 8. Cloudflare hygiene (recommended)
+## 8. DNS notes (GoDaddy)
 
-DNS lives at Cloudflare because GoDaddy cannot point a root domain at Railway. Keep SSL/TLS mode on **Full** (not Full Strict), keep "Always Use HTTPS" on, and leave the Railway CNAME records proxied or DNS-only consistently (do not mix).
+`www.americlearinsurance.com` is the canonical address: a `www` CNAME at GoDaddy points to Railway, and GoDaddy's domain forwarding sends the bare `americlearinsurance.com` to `https://www.americlearinsurance.com` with a 301. Do not delete the `@` A record GoDaddy manages for forwarding. If you ever move DNS to a provider with CNAME flattening (for example Cloudflare), you can make the bare domain canonical instead; update `DOMAIN` in `src/config.ts`, `site` in `astro.config.mjs`, `public/robots.txt`, and the redirect in `Caddyfile.template`.

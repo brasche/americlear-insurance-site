@@ -7,7 +7,8 @@
 export const LEGAL_NAME = 'AmeriClear Insurance Agency LLC';
 export const BRAND_NAME = 'AmeriClear Insurance Agency';
 export const SHORT_NAME = 'AmeriClear';
-export const DOMAIN = 'americlearinsurance.com';
+/** Canonical host. GoDaddy DNS cannot point the bare domain at Railway, so www is canonical and the apex forwards to it. */
+export const DOMAIN = 'www.americlearinsurance.com';
 export const SITE_URL = `https://${DOMAIN}`;
 
 /**

@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://americlearinsurance.com',
+  site: 'https://www.americlearinsurance.com',
   output: 'static',
   trailingSlash: 'always',
   build: { format: 'directory' },

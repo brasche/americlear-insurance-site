@@ -15,7 +15,7 @@ Copy-paste values for the brand and campaign registration in GoHighLevel (LC-Pho
 | Address | 3200 Park Center Dr, Costa Mesa, CA 92626, US |
 | Phone | `[PHONE NUMBER PENDING]` — set in `src/config.ts` first |
 | Email | info@americlearinsurance.com |
-| Website | https://americlearinsurance.com |
+| Website | https://www.americlearinsurance.com |
 | Vertical | Insurance |
 | Company status | Private |
 
@@ -25,10 +25,10 @@ Copy-paste values for the brand and campaign registration in GoHighLevel (LC-Pho
 
 | Field | URL |
 |---|---|
-| Privacy Policy | https://americlearinsurance.com/privacy-policy/ |
-| Terms & Conditions | https://americlearinsurance.com/terms/ |
-| SMS Terms (standalone) | https://americlearinsurance.com/sms-terms/ |
-| Opt-in page | https://americlearinsurance.com/quote/ |
+| Privacy Policy | https://www.americlearinsurance.com/privacy-policy/ |
+| Terms & Conditions | https://www.americlearinsurance.com/terms/ |
+| SMS Terms (standalone) | https://www.americlearinsurance.com/sms-terms/ |
+| Opt-in page | https://www.americlearinsurance.com/quote/ |
 
 ## 3. Recommended campaign type
 
@@ -37,13 +37,13 @@ Copy-paste values for the brand and campaign registration in GoHighLevel (LC-Pho
 ## 4. Campaign description
 
 ```
-AmeriClear Insurance Agency LLC is a licensed independent insurance agency. Consumers opt in via an unchecked checkbox on the quote form at https://americlearinsurance.com/quote/ and choose one or both of: (1) non-marketing messages about quote requests, appointment reminders, application and policy updates, and customer service; (2) marketing messages about our insurance products, promotions, and service updates. Every message identifies AmeriClear Insurance Agency and includes opt-out instructions. Privacy Policy: https://americlearinsurance.com/privacy-policy/ Terms: https://americlearinsurance.com/terms/
+AmeriClear Insurance Agency LLC is a licensed independent insurance agency. Consumers opt in via an unchecked checkbox on the quote form at https://www.americlearinsurance.com/quote/ and choose one or both of: (1) non-marketing messages about quote requests, appointment reminders, application and policy updates, and customer service; (2) marketing messages about our insurance products, promotions, and service updates. Every message identifies AmeriClear Insurance Agency and includes opt-out instructions. Privacy Policy: https://www.americlearinsurance.com/privacy-policy/ Terms: https://www.americlearinsurance.com/terms/
 ```
 
 ## 5. Message flow / how consumers opt in
 
 ```
-Consumers opt in on the website quote form at https://americlearinsurance.com/quote/ (also embedded on the home page and /contact/). The form has two separate, unchecked, optional checkboxes: one for non-marketing texts (quote requests, appointment reminders, application and policy updates, and customer service) and one for marketing texts (our insurance products, promotions, and service updates). Each label names AmeriClear Insurance Agency LLC and states that message frequency may vary, message & data rates may apply, text HELP for assistance, reply STOP to opt out. Links to the Privacy Policy, Terms & Conditions, and SMS Terms appear directly beneath the submit button along with the statement "Consent to receive text messages is not a condition of purchase." The form can be submitted with neither box checked. On submission we store the consent selections, the exact consent text shown, an ISO-8601 timestamp, the page URL, and the user agent as proof of consent. See screenshots: docs/screenshots/optin-form-desktop.png and docs/screenshots/optin-form-mobile.png.
+Consumers opt in on the website quote form at https://www.americlearinsurance.com/quote/ (also embedded on the home page and /contact/). The form has two separate, unchecked, optional checkboxes: one for non-marketing texts (quote requests, appointment reminders, application and policy updates, and customer service) and one for marketing texts (our insurance products, promotions, and service updates). Each label names AmeriClear Insurance Agency LLC and states that message frequency may vary, message & data rates may apply, text HELP for assistance, reply STOP to opt out. Links to the Privacy Policy, Terms & Conditions, and SMS Terms appear directly beneath the submit button along with the statement "Consent to receive text messages is not a condition of purchase." The form can be submitted with neither box checked. On submission we store the consent selections, the exact consent text shown, an ISO-8601 timestamp, the page URL, and the user agent as proof of consent. See screenshots: docs/screenshots/optin-form-desktop.png and docs/screenshots/optin-form-mobile.png.
 ```
 
 ## 6. Sample messages
@@ -95,7 +95,7 @@ The form POSTs flat JSON to `PUBLIC_FORM_ENDPOINT`:
   "consent_text_marketing": "I consent to receive marketing text messages about ...",
   "consent_text_nonmarketing": "I consent to receive non-marketing text messages from ...",
   "consent_timestamp": "2026-09-26T20:00:00.000Z",
-  "page_url": "https://americlearinsurance.com/quote/",
+  "page_url": "https://www.americlearinsurance.com/quote/",
   "user_agent": "Mozilla/5.0 ...",
   "form_version": "2026-09-26"
 }
@@ -103,7 +103,7 @@ The form POSTs flat JSON to `PUBLIC_FORM_ENDPOINT`:
 
 ### Option B (recommended): N8N webhook → GoHighLevel
 
-1. New workflow → add a **Webhook** node: HTTP Method `POST`, Path `americlear-quote`, Respond `Immediately`, Response Code `200`. Under Options, set **Allowed Origins (CORS)** to `https://americlearinsurance.com`.
+1. New workflow → add a **Webhook** node: HTTP Method `POST`, Path `americlear-quote`, Respond `Immediately`, Response Code `200`. Under Options, set **Allowed Origins (CORS)** to `https://www.americlearinsurance.com`.
 2. Add a **GoHighLevel** node (or HTTP Request to the LeadConnector API): action Create/Update Contact. Map `first_name`, `last_name`, `email`, `phone`, and put `zip`, `product_interest`, `best_time`, `message`, `consent_timestamp`, `page_url`, `form_version` into custom fields.
 3. Add an **IF** node: if `consent_marketing` is true → add tag `sms-marketing-consent`. Add a second IF: if `consent_nonmarketing` is true → add tag `sms-nonmarketing-consent`.
 4. If neither flag is true, leave the contact's SMS DND on (do not text them).

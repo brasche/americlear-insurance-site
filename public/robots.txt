@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://americlearinsurance.com/sitemap-index.xml
+Sitemap: https://www.americlearinsurance.com/sitemap-index.xml

@@ -22,9 +22,10 @@
 
 	respond /health 200
 
-	# Redirect www to the apex domain (Railway terminates TLS; the target is always https).
-	@www host www.americlearinsurance.com
-	redir @www https://americlearinsurance.com{uri} permanent
+	# www is canonical (GoDaddy forwards the apex here). Belt-and-braces: if bare-domain
+	# traffic ever reaches Railway directly, redirect it to www.
+	@apex host americlearinsurance.com
+	redir @apex https://www.americlearinsurance.com{uri} permanent
 
 	header {
 		X-Content-Type-Options "nosniff"
