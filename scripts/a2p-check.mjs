@@ -187,6 +187,17 @@ for (const [r, { $ }] of docs) {
 }
 (has('/quote/') && docs.get('/quote/').$('form').length ? ok : fail)('/quote/ has the opt-in form', '/quote/');
 
+// ---- 3b. Chat widget vs. phone-collecting forms (GoHighLevel "Multiple Opt-ins" rule) ----
+let widgetPages = 0;
+for (const [r, { $ }] of docs) {
+  const hasWidget = $('script[data-lc-chat-widget], script[src*="leadconnectorhq.com"]').length > 0;
+  const hasPhoneForm = $('form input[type=tel]').length > 0;
+  if (hasWidget) widgetPages++;
+  (!(hasWidget && hasPhoneForm) ? ok : fail)(`${r}: not both chat widget and phone-collecting form`, r);
+}
+if (widgetPages === 0) warn('chat widget not embedded on any page (PUBLIC_LC_WIDGET_ID not set at build time)', 'Base.astro');
+(has('/') && !docs.get('/').$('form input[type=tel]').length ? ok : fail)('/: home page has no phone-collecting form (widget page)', '/');
+
 // ---- 4. Footer on every page ----
 for (const [r, { $ }] of docs) {
   const footer = $('footer');

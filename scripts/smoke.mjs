@@ -84,6 +84,14 @@ const hasHScrollQuote = await mpage.evaluate(() => document.documentElement.scro
 check('quote form: no horizontal scroll at 390px', !hasHScrollQuote);
 await mctx.close();
 
+// Chat widget must never share a page with a phone-collecting form.
+for (const r of ROUTES) {
+  await page.goto(BASE + r, { waitUntil: 'load' });
+  const both = await page.evaluate(() => !!document.querySelector('script[data-lc-chat-widget]') && !!document.querySelector('form input[type=tel]'));
+  if (both) check(`${r}: chat widget and phone form on same page`, false);
+}
+check('no page has both chat widget and phone form', results.every((r) => !r.name.includes('chat widget and phone form') || r.pass));
+
 check('no console errors across routes', consoleErrors.length === 0, consoleErrors.slice(0, 5).join(' | '));
 
 await browser.close();

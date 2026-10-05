@@ -3,7 +3,6 @@ import Base from '../layouts/Base.astro';
 import TrustStrip from '../components/TrustStrip.astro';
 import ProductCard from '../components/ProductCard.astro';
 import Faq from '../components/Faq.astro';
-import QuoteForm from '../components/QuoteForm.astro';
 import Icon from '../components/Icon.astro';
 import {
   BRAND_NAME,
@@ -150,18 +149,21 @@ const steps = [
 
   <Faq items={faq} />
 
+  {/* The quote form intentionally lives on /quote/ and /contact/ only. Pages that load the
+      chat widget must not also collect phone numbers (GoHighLevel compliance review). */}
   <section aria-labelledby="quote-heading" class="bg-ivory">
-    <div class="container-x grid gap-10 py-16 lg:grid-cols-12">
-      <div class="lg:col-span-4">
+    <div class="container-x grid items-center gap-10 py-16 lg:grid-cols-12">
+      <div class="lg:col-span-7">
         <p class="eyebrow">Start here</p>
         <h2 id="quote-heading" class="mt-2 text-2xl sm:text-3xl">Request a free, no-obligation quote</h2>
         <span class="gold-rule mt-4"></span>
-        <p class="mt-4 text-slate">
-          Share the basics and a licensed agent will reach out during business hours. Text messaging is optional and never required.
+        <p class="mt-4 max-w-xl text-slate">
+          Share the basics on our quote page and a licensed agent will reach out during business hours. Text messaging is optional and never required.
         </p>
       </div>
-      <div class="lg:col-span-8">
-        <QuoteForm id="home-quote" heading="Get a Quote" />
+      <div class="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
+        <a href="/quote/" class="btn btn-navy">Get a Quote</a>
+        <a href="/contact/" class="btn btn-outline">Contact Us</a>
       </div>
     </div>
   </section>

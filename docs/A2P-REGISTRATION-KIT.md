@@ -46,6 +46,10 @@ AmeriClear Insurance Agency LLC is a licensed independent insurance agency. Cons
 Consumers opt in on the website quote form at https://www.americlearinsurance.com/quote/ (also embedded on the home page and /contact/). The form has two separate, unchecked, optional checkboxes: one for non-marketing texts (quote requests, appointment reminders, application and policy updates, and customer service) and one for marketing texts (our insurance products, promotions, and service updates). Each label names AmeriClear Insurance Agency LLC and states that message frequency may vary, message & data rates may apply, text HELP for assistance, reply STOP to opt out. Links to the Privacy Policy, Terms & Conditions, and SMS Terms appear directly beneath the submit button along with the statement "Consent to receive text messages is not a condition of purchase." The form can be submitted with neither box checked. On submission we store the consent selections, the exact consent text shown, an ISO-8601 timestamp, the page URL, and the user agent as proof of consent. See screenshots: docs/screenshots/optin-form-desktop.png and docs/screenshots/optin-form-mobile.png.
 ```
 
+### Chat widget opt-in (GoHighLevel compliance review)
+
+If you register through GoHighLevel's chat-widget review flow, its automated check requires: (1) the LeadConnector chat widget script on the website, and (2) no form that collects a phone number on any page where the widget is embedded ("Multiple Opt-ins"). This site satisfies both: the widget loads on every page except `/quote/` and `/contact/`, which are the only pages with the quote form, and the home page links to `/quote/` instead of embedding it. The SMS Terms and Privacy Policy both describe the chat widget as an opt-in channel. `scripts/a2p-check.mjs` fails the build if any page ever has both.
+
 ## 6. Sample messages
 
 Non-marketing (quote follow-up):

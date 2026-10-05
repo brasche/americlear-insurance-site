@@ -96,8 +96,19 @@ export const TPMO_DISCLAIMER = tpmoText(MEDICARE_TPMO);
 export const FORM_VERSION = '2026-09-26';
 export const POLICY_EFFECTIVE_DATE = 'September 26, 2026';
 
-/** Form endpoint: injected at build time from PUBLIC_FORM_ENDPOINT (.env locally, GitHub secret in CI). */
+/** Form endpoint: injected at build time from PUBLIC_FORM_ENDPOINT (.env locally, Railway variable in production). */
 export const FORM_ENDPOINT: string = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+
+/**
+ * GoHighLevel / LeadConnector chat widget ID (the data-widget-id value from the
+ * embed code under Sites → Chat Widget). Injected at build time from
+ * PUBLIC_LC_WIDGET_ID. When set, the widget loads on every page EXCEPT pages
+ * that contain a phone-collecting form (/quote/, /contact/): GoHighLevel's
+ * compliance review rejects any page that has both the widget and such a form.
+ */
+export const LC_WIDGET_ID: string = import.meta.env.PUBLIC_LC_WIDGET_ID ?? '';
+export const LC_WIDGET_LOADER = 'https://widgets.leadconnectorhq.com/loader.js';
+export const LC_WIDGET_RESOURCES = 'https://widgets.leadconnectorhq.com/chat-widget/loader.js';
 
 export const NAV = [
   ...PRODUCTS.map((p) => ({ href: `/${p.slug}/`, label: p.name })),

@@ -47,6 +47,10 @@ Or in the Railway dashboard: service → Variables → New Variable.
 
 See `docs/A2P-REGISTRATION-KIT.md` for the payload fields and the GoHighLevel tagging logic.
 
+## Chat widget
+
+Set the Railway variable `PUBLIC_LC_WIDGET_ID` to the GoHighLevel chat widget ID (`data-widget-id` from Sites → Chat Widget → Get Code). The widget then loads on every page except `/quote/` and `/contact/`. Never add the quote form to a page that loads the widget, and never pass `chatWidget` as true on a page with the form: GoHighLevel's compliance review rejects pages that have both, and the build's compliance check enforces it.
+
 ## Add a photo
 
 See `public/images/README.md`. Two styled slots are reserved (home hero, about page).

@@ -11,6 +11,19 @@ Items are ordered shortest-first. Everything else on the site is complete and ve
 3. Commit and push. The site redeploys in about two minutes.
 4. Confirm the footer on https://www.americlearinsurance.com shows the number, then submit the A2P brand and campaign. The number on the site must match the number you register.
 
+## 1b. Chat widget ID (required for GoHighLevel's chat-widget compliance review)
+
+GoHighLevel's review requires its LeadConnector chat widget on the site and rejects any page that has both the widget and a phone-collecting form. The site loads the widget on every page except `/quote/` and `/contact/` once the ID is set.
+
+1. In GoHighLevel: **Sites → Chat Widget** → open your widget → **Get Code** (or "Install Code"). Copy the value of `data-widget-id` from the snippet (a 24-character ID).
+2. Set it on Railway (this triggers a rebuild):
+
+```bash
+railway variable set PUBLIC_LC_WIDGET_ID="<widget id>"
+```
+
+3. Confirm the chat bubble appears on https://www.americlearinsurance.com/ and does not appear on `/quote/` or `/contact/`, then re-run the compliance check in GoHighLevel.
+
 ## 2. Form endpoint (required for the form to deliver)
 
 `PUBLIC_FORM_ENDPOINT` is not set yet, so the form shows a friendly error with the agency email instead of sending. Follow the N8N or GoHighLevel setup in `docs/A2P-REGISTRATION-KIT.md` section 9, then set the Railway variable (this triggers a rebuild automatically):

@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { BRAND_NAME, SITE_URL } from '../config';
+import { BRAND_NAME, SITE_URL, LC_WIDGET_ID, LC_WIDGET_LOADER, LC_WIDGET_RESOURCES } from '../config';
 
 interface Props {
   title: string;
@@ -10,8 +10,15 @@ interface Props {
   /** Optional JSON-LD objects to emit in the head. */
   jsonLd?: Record<string, unknown>[];
   ogImage?: string;
+  /**
+   * Load the GoHighLevel chat widget on this page. MUST be false on any page
+   * that renders a form collecting a phone number (GoHighLevel compliance
+   * review rejects pages that have both). Defaults to true.
+   */
+  chatWidget?: boolean;
 }
-const { title, description, jsonLd = [], ogImage = '/og-default.png' } = Astro.props;
+const { title, description, jsonLd = [], ogImage = '/og-default.png', chatWidget = true } = Astro.props;
+const loadWidget = chatWidget && LC_WIDGET_ID.length > 0;
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
 const fullTitle = title === BRAND_NAME ? title : `${title} | ${BRAND_NAME}`;
 const ogImageUrl = new URL(ogImage, SITE_URL).href;
@@ -69,5 +76,8 @@ const ogImageUrl = new URL(ogImage, SITE_URL).href;
       <slot />
     </main>
     <Footer />
+    {loadWidget && (
+      <script is:inline src={LC_WIDGET_LOADER} data-resources-url={LC_WIDGET_RESOURCES} data-widget-id={LC_WIDGET_ID} data-lc-chat-widget></script>
+    )}
   </body>
 </html>
